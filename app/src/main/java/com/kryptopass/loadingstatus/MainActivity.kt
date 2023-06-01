@@ -18,7 +18,6 @@ import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.kryptopass.loadingstatus.databinding.ActivityMainBinding
 import timber.log.Timber
@@ -31,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var pendingIntent: PendingIntent
-    // private lateinit var action: NotificationCompat.Action
 
     private var sourceMetadata: SourceMetadata? = null
 
@@ -85,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
 
-                else -> createToast(getString(R.string.select_file))
+                else -> sourceMetadata = null
             }
         }
     }
@@ -110,8 +108,15 @@ class MainActivity : AppCompatActivity() {
 
                 createToast("Success, send notification: ${sourceMetadata?.fileTitle!!}")
 
-                notificationManager = ContextCompat.getSystemService(applicationContext, NotificationManager::class.java) as NotificationManager
-                notificationManager.sendNotification(sourceMetadata?.fileTitle!!, applicationContext, pendingIntent)
+                notificationManager = ContextCompat.getSystemService(
+                    applicationContext,
+                    NotificationManager::class.java
+                ) as NotificationManager
+                notificationManager.sendNotification(
+                    sourceMetadata?.fileTitle!!,
+                    applicationContext,
+                    pendingIntent
+                )
             }
         }
     }
