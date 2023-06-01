@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
         createChannel(
             getString(R.string.notification_channel_id),
             getString(R.string.notification_channel_name)
@@ -48,6 +47,16 @@ class MainActivity : AppCompatActivity() {
         binding.layoutMain.buttonLoader.setOnClickListener {
             download()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(receiver)
     }
 
     fun onRadioButtonClicked(view: View) {

@@ -52,6 +52,7 @@ dependencies {
 
     implementation "com.google.android.material:material:$version_material"
     implementation "com.jakewharton.timber:timber:$version_timber"
+    implementation "com.squareup.leakcanary:leakcanary-android:$version_leakcanary"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
