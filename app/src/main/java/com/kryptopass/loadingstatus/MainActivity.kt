@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var pendingIntent: PendingIntent
-    private lateinit var action: NotificationCompat.Action
+    // private lateinit var action: NotificationCompat.Action
 
     private var sourceMetadata: SourceMetadata? = null
 

@@ -35,4 +35,7 @@
     <string name="select_file">Please select the file to download</string>
     <string name="no_internet">No internet, please try again later</string>
 
+    <string name="file_title">File name: </string>
+    <string name="status">Status: </string>
+    <string name="ok">OK</string>
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-    <dimen name="content_dimen_200dp">200dp</dimen>
+    <dimen name="view_dimen_200dp">200dp</dimen>
     <dimen name="spacing_8dp">8dp</dimen>
     <dimen name="spacing_12dp">12dp</dimen>
     <dimen name="spacing_16dp">16dp</dimen>
@@ -7,13 +7,4 @@
     <dimen name="spacing_60dp">60dp</dimen>
 
     <dimen name="text_size_20sp">20sp</dimen>
-
-<!--    <dimen name="custom_view_height">60dp</dimen>-->
-<!--    <dimen name="custom_view_spacing">20dp</dimen>-->
-<!--    <dimen name="download_image_height">200dp</dimen>-->
-<!--    <dimen name="spacing_default">16dp</dimen>-->
-<!--    <dimen name="spacing_large">12dp</dimen>-->
-<!--    <dimen name="spacing_medium">8dp</dimen>-->
-<!--    <dimen name="spacing_xlarge">32dp</dimen>-->
-<!--    <dimen name="text_size_default">20sp</dimen>-->
 </resources>
