@@ -31,15 +31,19 @@ class MainActivity : AppCompatActivity() {
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
-        // TODO: Implement code below
-//        binding.custom_button.setOnClickListener {
-//            download()
-//        }
+        binding.layoutMain.buttonLoader.setOnClickListener {
+            binding.layoutMain.buttonLoader.buttonState = ButtonState.Completed
+            download()
+        }
     }
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+
+            binding.layoutMain.buttonLoader.buttonState = ButtonState.Completed
+
+
         }
     }
 

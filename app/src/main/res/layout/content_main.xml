@@ -9,14 +9,62 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <com.kryptopass.loadingstatus.LoadingButton
-        android:id="@+id/custom_button"
+    <ImageView
+        android:id="@+id/logo_banner"
         android:layout_width="0dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="@dimen/content_dimen_200dp"
+        android:background="@color/colorPrimaryDark"
+        android:contentDescription="@string/logo_banner"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_height="@dimen/spacing_60"
-        android:layout_margin="@dimen/spacing_20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_download" />
+
+    <RadioGroup
+        android:id="@+id/radio_button_group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/radio_button_checked"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/button_loader"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo_banner">
+
+        <RadioButton
+            android:id="@+id/radio_button_glide_selection"
+            style="@style/RadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/glide_title" />
+
+        <RadioButton
+            android:id="@+id/radio_button_starter_selection"
+            style="@style/RadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/starter_title" />
+
+        <RadioButton
+            android:id="@+id/radio_button_retrofit_selection"
+            style="@style/RadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/retrofit_title" />
+
+    </RadioGroup>
+
+    <com.kryptopass.loadingstatus.LoadingButton
+        android:id="@+id/button_loader"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/spacing_60dp"
+        android:layout_margin="@dimen/spacing_20dp"
+        app:color_background="@color/colorPrimary"
+        app:color_circle="@color/colorAccent"
+        app:color_loading="@color/colorPrimaryDark"
+        app:color_text="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
