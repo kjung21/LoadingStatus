@@ -1,6 +1,7 @@
 package com.kryptopass.loadingstatus
 
 import android.app.DownloadManager
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -10,6 +11,7 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
@@ -17,6 +19,7 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.kryptopass.loadingstatus.databinding.ActivityMainBinding
 import timber.log.Timber
 
@@ -39,6 +42,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+        createChannel(
+            getString(R.string.notification_channel_id),
+            getString(R.string.notification_channel_name)
+        )
 
         binding.layoutMain.buttonLoader.setOnClickListener {
             download()
@@ -87,8 +94,46 @@ class MainActivity : AppCompatActivity() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
-            binding.layoutMain.buttonLoader.buttonState = ButtonState.Completed
+            if (downloadId == id) {
+                binding.layoutMain.buttonLoader.buttonState = ButtonState.Completed
 
+                val contentIntent = Intent(applicationContext, DetailActivity::class.java)
+                contentIntent.putExtra(FILE_TITLE, sourceMetadata?.fileTitle)
+                contentIntent.putExtra(STATUS, sourceMetadata?.status)
+
+                pendingIntent = PendingIntent.getActivity(
+                    applicationContext,
+                    NOTIFICATION_ID,
+                    contentIntent,
+                    PendingIntent.FLAG_IMMUTABLE
+                )
+
+                createToast("Success, send notification: ${sourceMetadata?.fileTitle!!}")
+
+                notificationManager = ContextCompat.getSystemService(applicationContext, NotificationManager::class.java) as NotificationManager
+                notificationManager.sendNotification(sourceMetadata?.fileTitle!!, applicationContext, pendingIntent)
+            }
+        }
+    }
+
+    private fun createChannel(channelId: String, channelName: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(
+                channelId,
+                channelName,
+                NotificationManager.IMPORTANCE_HIGH
+            )
+
+            notificationChannel.enableVibration(true)
+            notificationChannel.enableLights(true)
+            notificationChannel.enableVibration(true)
+            notificationChannel.description = getString(R.string.notification_title)
+            notificationChannel.apply {
+                setShowBadge(false)
+            }
+
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(notificationChannel)
         }
     }
 
