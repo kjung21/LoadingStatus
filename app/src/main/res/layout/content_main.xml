@@ -36,6 +36,7 @@
             style="@style/RadioButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:onClick="onRadioButtonClicked"
             android:text="@string/glide_title" />
 
         <RadioButton
@@ -43,6 +44,7 @@
             style="@style/RadioButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:onClick="onRadioButtonClicked"
             android:text="@string/starter_title" />
 
         <RadioButton
@@ -50,6 +52,7 @@
             style="@style/RadioButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:onClick="onRadioButtonClicked"
             android:text="@string/retrofit_title" />
 
     </RadioGroup>
